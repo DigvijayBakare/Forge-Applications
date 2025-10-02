@@ -1,0 +1,38 @@
+modules:
+  jira:globalPage:
+    - key: test-1-hello-world-page
+      resource: main
+      resolver:
+        function: resolver
+      title: forge-training-app
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: static/hello-world/build
+    tunnel:
+      port: 3000
+app:
+  runtime:
+    name: nodejs22.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/fc779345-138f-4c1d-92dd-190ab37de3cb
+
+# Permissions
+permissions:
+  scopes:
+    - read:jira-user
+    - read:jira-work
+    - storage:app
+  content:
+    styles:
+      - unsafe-inline
+  external:
+    fetch:
+      backend:
+        - address: https://*.atlassian.net
+        - address: https://api.atlassian.com
+        - address: "*.atlassian.com"
+        - address: "*.xecurify.com"
