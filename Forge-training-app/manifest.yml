@@ -1,18 +1,38 @@
 modules:
   jira:globalPage:
     - key: test-1-hello-world-page
+      title: forge-training-app
       resource: main
       resolver:
         function: resolver
-      title: forge-training-app
+
+  jira:adminPage:
+    - key: admin-page
+      title: Admin Page
+      resource: hello-world
+      resolver:
+        function: resolver
+
+  jira:projectPage:
+    - key: user-assigned-issues-page
+      title: Assigned Issues
+      resource: hello-world
+      resolver:
+        function: resolver
+
   function:
     - key: resolver
       handler: index.handler
+
 resources:
   - key: main
     path: static/hello-world/build
     tunnel:
       port: 3000
+
+  - key: hello-world
+    path: static/hello-world/build
+
 app:
   runtime:
     name: nodejs22.x
